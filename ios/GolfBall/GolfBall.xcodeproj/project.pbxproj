@@ -14,6 +14,8 @@
 		F305ABF71BAD1B9D00A9B685 /* GolfBall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F305ABF51BAD1B9D00A9B685 /* GolfBall.xcdatamodeld */; };
 		F305ABF91BAD1B9D00A9B685 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F305ABF81BAD1B9D00A9B685 /* Assets.xcassets */; };
 		F305ABFC1BAD1B9D00A9B685 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F305ABFA1BAD1B9D00A9B685 /* LaunchScreen.storyboard */; };
+		F305AC051BAD1D4900A9B685 /* BluetoothConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F305AC041BAD1D4900A9B685 /* BluetoothConnectionManager.m */; settings = {ASSET_TAGS = (); }; };
+		F305AC081BAD20EB00A9B685 /* GolfBall.m in Sources */ = {isa = PBXBuildFile; fileRef = F305AC071BAD20EB00A9B685 /* GolfBall.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,10 @@
 		F305ABF81BAD1B9D00A9B685 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F305ABFB1BAD1B9D00A9B685 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F305ABFD1BAD1B9D00A9B685 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F305AC031BAD1D4900A9B685 /* BluetoothConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothConnectionManager.h; sourceTree = "<group>"; };
+		F305AC041BAD1D4900A9B685 /* BluetoothConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothConnectionManager.m; sourceTree = "<group>"; };
+		F305AC061BAD20EB00A9B685 /* GolfBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GolfBall.h; sourceTree = "<group>"; };
+		F305AC071BAD20EB00A9B685 /* GolfBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GolfBall.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,12 +70,16 @@
 				F305ABED1BAD1B9D00A9B685 /* AppDelegate.m */,
 				F305ABEF1BAD1B9D00A9B685 /* ViewController.h */,
 				F305ABF01BAD1B9D00A9B685 /* ViewController.m */,
+				F305AC031BAD1D4900A9B685 /* BluetoothConnectionManager.h */,
+				F305AC041BAD1D4900A9B685 /* BluetoothConnectionManager.m */,
 				F305ABF21BAD1B9D00A9B685 /* Main.storyboard */,
 				F305ABF81BAD1B9D00A9B685 /* Assets.xcassets */,
 				F305ABFA1BAD1B9D00A9B685 /* LaunchScreen.storyboard */,
 				F305ABFD1BAD1B9D00A9B685 /* Info.plist */,
 				F305ABF51BAD1B9D00A9B685 /* GolfBall.xcdatamodeld */,
 				F305ABE91BAD1B9D00A9B685 /* Supporting Files */,
+				F305AC061BAD20EB00A9B685 /* GolfBall.h */,
+				F305AC071BAD20EB00A9B685 /* GolfBall.m */,
 			);
 			path = GolfBall;
 			sourceTree = "<group>";
@@ -154,8 +164,10 @@
 			files = (
 				F305ABF71BAD1B9D00A9B685 /* GolfBall.xcdatamodeld in Sources */,
 				F305ABF11BAD1B9D00A9B685 /* ViewController.m in Sources */,
+				F305AC081BAD20EB00A9B685 /* GolfBall.m in Sources */,
 				F305ABEE1BAD1B9D00A9B685 /* AppDelegate.m in Sources */,
 				F305ABEB1BAD1B9D00A9B685 /* main.m in Sources */,
+				F305AC051BAD1D4900A9B685 /* BluetoothConnectionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

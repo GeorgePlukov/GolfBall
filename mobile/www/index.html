@@ -33,76 +33,61 @@
         <div class="list">
           <div class="item text-center">
             <p class="text-feature">SCORE</p>
-            <ion-slide-box show-pager="false">
-              <ion-slide>
-                <div>
-                  <h1 class="text-no-margin">{{ score }}</h1>
-                </div>
-              </ion-slide>
-              <ion-slide>
-                <div>
-                  <h1 class="text-no-margin">2</h1>
-                </div>
-              </ion-slide>
-            </ion-slide-box>
-          </div>
-          <div class="item text-center">
-            <p class="text-feature">STATS</p>
-            <div class="row">
-              <div class="col">
-                <p class="text-feature">BIRDIES</p>
-              </div>
-              <div class="col">
-                <p class="text-feature">EAGLES</p>
-              </div>
-              <div class="col">
-                <p class="text-feature">PARS</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <p>DISTANCE</p>
-              </div>
-            </div>
+            <h1 class="text-no-margin">{{ score }}</h1>
           </div>
           <div class="scorecard">
-            <div class="row"  ng-if="frontNine">
-              <div class="col center">Hole</div>
-              <div ng-repeat="hole in holes1">
-                <div class="col center">{{hole}}</div>
-              </div>
-              <div class="col center">In</div>
-              <div class="col center">Total</div>
-              <div class="col center" ng-click="changeNine()">></div>
-            </div>
-            <div class="row" ng-if="!frontNine">
-              <div class="col center">Hole</div>
-              <div ng-repeat="hole in holes2">
-                <div class="col center">{{hole}}</div>
-              </div>
-              <div class="col center">Out</div>
-              <div class="col center">Total</div>
-              <div class="col center" ng-click="changeNine()"><</div>
-            </div>
             <div class="row">
-              <div class="col center">Par</div>
-              <div ng-repeat="par in pars track by $index">
-                <div class="col center">{{par}}</div>
+              <div class="col col-20">
+                <div>Hole</div>
+                <div>Par</div>
+                <div>Score</div>
               </div>
-              <div class="col center">36</div>
-              <div class="col center">72</div>
-              <div class="col center"></div>
-            </div>
-            <div class="row">
-              <div class="col center">Score</div>
-              <div ng-repeat="score in scores track by $index">
-                <div class="col center">{{score}}</div>
+              <div class="col col-80">
+                <ion-scroll direction="x">
+                  <div class="scorecard-row">
+                    <div class="scorecard-col center" ng-repeat="hole in holes">
+                      <div>{{ hole.hole }}</div>
+                      <div>{{ hole.par || '-' }}</div>
+                      <div>{{ hole.score || '-' }}</div>
+                    </div>
+                    <div class="scorecard-col center">
+                      <div>In</div>
+                      <div>-</div>
+                      <div>-</div>
+                    </div>
+                    <div class="scorecard-col center">
+                      <div>Out</div>
+                      <div>-</div>
+                      <div>-</div>
+                    </div>
+                    <div class="scorecard-col center">
+                      <div>Total</div>
+                      <div>-</div>
+                      <div>-</div>
+                    </div>
+                  </div>
+                </ion-scroll>
               </div>
-              <div class="col center">-</div>
-              <div class="col center">-</div>
-              <div class="col center"></div>
             </div>
-
+            <div class="item text-center">
+              <p class="text-feature">STATS</p>
+              <div class="row">
+                <div class="col">
+                  <p class="text-feature">BIRDIES</p>
+                </div>
+                <div class="col">
+                  <p class="text-feature">EAGLES</p>
+                </div>
+                <div class="col">
+                  <p class="text-feature">PARS</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p>DISTANCE</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </ion-content>

@@ -1,3 +1,7 @@
+.scroll {
+  height: 100%;
+}
+
 .text-large {
   font-size: 72px;
 }
@@ -8,4 +12,13 @@
 
 .center {
 	text-align: center;
+}
+
+.scorecard-row {
+  white-space: nowrap;
+}
+
+.scorecard-col {
+  min-width: 25px;
+  display: inline-block;
 }

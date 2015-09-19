@@ -8,8 +8,10 @@ void setup() {
   
   Serial.begin(57600);
   Bean.setLed(100,100,255);
+
   Bean.enableConfigSave(false);
-  Bean.setBeanName("GOLF:");
+  Bean.setBeanName("GOLF:false");
+
   // put your setup code here, to run once:
   pinMode(sensorPowerPin, OUTPUT);
   digitalWrite(sensorPowerPin, HIGH);
@@ -40,6 +42,7 @@ void loop() {
     String message = "true";
     Bean.setBeanName("GOLF:" + message);
     Bean.sleep(1000);
+
   }
   // Turn the led off when the sensor goes up a large amount
   if ((sensorValue - previousLight) > 25){

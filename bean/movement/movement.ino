@@ -9,7 +9,8 @@ int timer = 0;
 
 void setup() {
   // Turn off the Bean's LED
-  Bean.setLed(0, 0, 0);  
+  Bean.setLed(0, 0, 0);
+  Bean.enableConfigSave(false);
   // Initial reading  
   previousAccel = Bean.getAcceleration(); 
 }
@@ -19,7 +20,16 @@ void loop() {
   AccelerationReading currentAccel = Bean.getAcceleration();   
   int totalAcceleration = abs(currentAccel.xAxis) + abs(currentAccel.yAxis) + abs(currentAccel.zAxis);
   
+  bool connected = Bean.getConnectionState();
   
+  if(connected){
+    
+    scoreTracker = 0;
+    String message = String(scoreTracker, DEC)  + "," + String(totalAcceleration, DEC);
+    Bean.setBeanName("GOLF:" + message);
+    Bean.sleep(100);
+    
+  }
   
   // Find the difference between the current acceleration and that of 200ms ago.
   int accelDifference = getAccelDifference(previousAccel, currentAccel); 
@@ -27,25 +37,35 @@ void loop() {
   previousAccel = currentAccel;
   
   if(accelDifference > THRESHOLD){
-      
-      if((totalAcceleration > 500) && (timer > 1000)){
+
+      if((totalAcceleration > 300) && (timer > 100)){
+        
         scoreTracker = scoreTracker + 1;
-        Serial.println(scoreTracker);
+        String message = String(scoreTracker, DEC)  + "," + String(totalAcceleration, DEC);
+        //Serial.println(message);
+        Bean.setBeanName("GOLF:" + message);
         timer = 0;
-        Bean.sleep(1000);
+        Bean.sleep(3000);
       }
       
       else{
+
        timer = 0;
-       Bean.sleep(100); 
+       Bean.sleep(50);
+      
+       
       }
       
 
   }
   
   else{
-   timer = timer + 100;
-   Bean.sleep(100);
+
+   timer = timer + 50;
+   if(timer > 3000){
+    timer = 3000; 
+   }
+   Bean.sleep(50);
   }
   
   

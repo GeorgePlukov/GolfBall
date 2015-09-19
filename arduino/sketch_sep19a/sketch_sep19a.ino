@@ -3,19 +3,19 @@ int sensorLow = 1023;
 int sensorHigh = 0;
 int previousLight;
 const int sensorPowerPin = 5;
+const int ledPin = 3;
 
 void setup() {
   
   Serial.begin(57600);
-  Bean.setLed(100,100,255);
-
+  Bean.setLed(255,0,0);
   Bean.enableConfigSave(false);
   Bean.setBeanName("GOLF:false");
-
   // put your setup code here, to run once:
   pinMode(sensorPowerPin, OUTPUT);
+  //pinMode(ledPin, OUTPUT);
   digitalWrite(sensorPowerPin, HIGH);
-
+ // digitalWrite(ledPin, HIGH);
   while (millis() < 2000){
     sensorValue = analogRead(A0);
 
@@ -40,16 +40,15 @@ void loop() {
   if ((previousLight - sensorValue) > 50){
     Serial.println("SCORE: " +  String(previousLight - sensorValue, DEC));
     String message = "true";
-    Bean.setBeanName("GOLF:" + message);
-    Bean.sleep(1000);
-
+    Bean.setBeanName("HOLE:" + message);
+    Bean.setLed(0,255,0);
   }
   // Turn the led off when the sensor goes up a large amount
   if ((sensorValue - previousLight) > 25){
     Serial.println("UNSCORE: " + String(sensorValue - previousLight, DEC));
     String message = "false";
-    Bean.setBeanName("GOLF:" + message);
-
+    Bean.setBeanName("HOLE:" + message);
+    Bean.setLed(255,0,0);
   }
   previousLight = sensorValue;
   delay(500);

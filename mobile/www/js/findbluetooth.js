@@ -8,33 +8,23 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $interval,
         $scope.pars = ['4', '4', '5', '3', '4', '3', '4', '4', '5'];
         $scope.scores = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
         $scope.frontNine = true;
-
+        
         if (window.cordova) {
 
             ble.startScan([], function(device) {
-                // console.log(device.name.substring(0,4) || 'undefined');
-                if (device.name == undefined) {
-
-                } else {
-                    if (device.name.substring(0, 4) == 'GOLF') {
-                        if ($scope.golfBalls.length == 0) {
-                            $scope.golfBalls.push(device);
-                            showPopup();
-                        } else {
-                            for (var i = 0; i < $scope.golfBalls.length; i++) {
-                                if (device.name == $scope.golfBalls[i].name) {
-                                    break;
-                                }
-                                if (i == $scope.golfBalls.length - 1) {
-                                    $scope.golfBalls.push(device);
-                                    showPopup();
-                                }
-                            }
-                        }
-                        console.log($scope.golfBalls);
-                    }
+            if (device.name != undefined && device.name.substring(0, 4) == 'GOLF') {
+              var isNewGolfBall = true;
+              for (var i = 0; i < $scope.golfBalls.length; i++) {
+                if (device.name == $scope.golfBalls[i].name) {
+                  isNewGolfBall = false;
                 }
-            });
+              }
+              if (isNewGolfBall) {
+                  $scope.golfBalls.push(device);
+                  showPopup();
+              }
+            }
+        });
         }
 
         function showPopup() {

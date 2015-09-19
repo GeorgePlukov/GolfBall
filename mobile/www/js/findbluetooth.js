@@ -43,7 +43,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $interval,
                   connectToGolfBall(golfBall);
                 }
               };
-            });
+            })
           });
         }
 

@@ -13,6 +13,7 @@
 
 @property (nonatomic, assign) id delegate;
 
+- (id)initWithDelegate:(id)delegate;
 - (void)scanForGolfBalls;
 - (void)connectToGolfBall:(GolfBall *)golfBall;
 

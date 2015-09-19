@@ -109,6 +109,12 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                     });
                 }
                 firstTimeConnecting = false;
+
+                ble.disconnect(golfBall.id, function(success) {
+                  console.log('Disconnect ball successful');
+                }, function(error) {
+                  console.log('ERROR: Disconnect ball');
+                });
             }, function(error) {
                 $ionicLoading.hide();
                 if (firstTimeConnecting) {

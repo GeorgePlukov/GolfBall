@@ -4,6 +4,11 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
 
         $scope.golfBalls = [];
         $scope.golfBall = null;
+        $scope.holes1 = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $scope.holes2 = ['10', '11', '12', '13', '14', '15', '16', '17', '18'];
+        $scope.pars = ['4', '4', '5', '3', '4', '3', '4', '4', '5'];
+        $scope.scores = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
+        $scope.frontNine = true;
 
         function scanForGolfBalls() {
             ble.startScan([], function(device) {
@@ -34,7 +39,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                     return {
                         text: golfBall.name,
                         onTap: function() {
-                          connectToGolfBall(golfBall);
+                            connectToGolfBall(golfBall);
                         }
                     };
                 })
@@ -63,6 +68,10 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                     scanForGolfBalls();
                 });
             });
+        }
+        
+        $scope.changeNine = function() {
+            $scope.frontNine = !$scope.frontNine;
         }
 
         // Scan for golf balls from the start

@@ -1,4 +1,4 @@
-app.controller('bluetoothCtrl', function($ionicPlatform, $interval, $scope) {
+app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $interval, $scope) {
 
     $ionicPlatform.ready(function() {
 
@@ -12,6 +12,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $interval, $scope) {
                 if (device.name.substring(0, 4) == 'GOLF') {
                     if ($scope.golfBalls.length == 0) {
                         $scope.golfBalls.push(device);
+                        showPopup();
                     } else {
                         for (var i = 0; i < $scope.golfBalls.length; i++) {
                             if (device.name == $scope.golfBalls[i].name) {
@@ -19,6 +20,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $interval, $scope) {
                             }
                             if (i == $scope.golfBalls.length - 1) {
                                 $scope.golfBalls.push(device);
+                                showPopup();
                             }
                         }
                     }
@@ -26,6 +28,32 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $interval, $scope) {
                 }
             }
         });
-    })
 
-})
+        function showPopup() {
+          if ($scope.popup) {
+            $scope.popup.close();
+          }
+          $scope.popup = $ionicPopup.show({
+            template: 'Connect to a Golf ball:',
+            scope: $scope,
+            buttons: $scope.golfBalls.map(function(golfBall) {
+              return {
+                text: golfBall.name,
+                onTap: function() {
+                  connectToGolfBall(golfBall);
+                }
+              };
+            });
+          });
+        }
+
+        function connectToGolfBall(golfBall) {
+          ble.stopScan();
+          ble.connect(golfBall.id, function(success) {
+            console.log('Connected to ball!');
+          });
+        }
+
+    });
+
+});

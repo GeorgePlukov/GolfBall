@@ -6,6 +6,14 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
         $scope.golfBall = null;
         $scope.popup = null;
         $scope.score = 'n/a';
+
+        $scope.holes1 = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $scope.holes2 = ['10', '11', '12', '13', '14', '15', '16', '17', '18'];
+        $scope.pars = ['4', '4', '5', '3', '4', '3', '4', '4', '5'];
+        $scope.scores = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
+        $scope.frontNine = true;
+        if(window.ble === undefined) return;
+
         $scope.holes = [
             { hole: 1, par: 4, score: null },
             { hole: 2, par: 4, score: null },
@@ -33,6 +41,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
         };
 
         function scanForGolfBalls() {
+
             ble.startScan([], function(device) {
                 console.log('New device: ' + device);
                 if (device.name != undefined && device.name.substring(0, 4) == 'GOLF') {

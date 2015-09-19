@@ -1,3 +1,7 @@
+int sensorValue;
+int sensorLow = 1023;
+int sensorHigh = 0;
+
 void setup() {
   // put your setup code here, to run once:
 

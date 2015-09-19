@@ -3,6 +3,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $interval, $scope) {
     $ionicPlatform.ready(function() {
 
         $scope.golfBalls = [];
+        $scope.holes = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
         ble.startScan([], function(device) {
             // console.log(device.name.substring(0,4) || 'undefined');

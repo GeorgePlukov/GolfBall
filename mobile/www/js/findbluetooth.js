@@ -1,11 +1,11 @@
 app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoading, $interval, $scope) {
 
     $ionicPlatform.ready(function() {
-
+        var firstTimeConnecting = true;
         $scope.golfBalls = [];
         $scope.golfBall = null;
         $scope.popup = null;
-        $scope.hole = null;
+        $scope.hole = 0;
         $scope.score = 'n/a';
         $scope.holes = [
             { hole: 1, par: 4, score: null },
@@ -34,8 +34,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
         };
 
         function scanForGolfBalls() {
-        
-        if(window.ble === undefined) return;
+            if(window.ble === undefined) return;
 
             ble.startScan([], function(device) {
                 console.log('New device: ' + device);
@@ -50,6 +49,17 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                         $scope.golfBalls.push(device);
                         showPopup();
                     }
+                }
+            });
+        }
+
+        function scanForHoles() {
+            if (window.ble === undefined) return;
+
+            ble.startScan([], function(device) {
+                console.log('New devices: ' + device);
+                if (device.name != undefined && device.name.substring(0, 4) == 'HOLE') {
+                    connectToGolfball($scope.golfBall);
                 }
             });
         }
@@ -74,36 +84,43 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
             });
         }
 
-        function updateScoreForHole(hole, score) {
-          $scope.holes[hole]['score'] = score;
-        }
-
         function connectToGolfBall(golfBall) {
             ble.stopScan();
-            $ionicLoading.show({
-                template: '<ion-spinner></ion-spinner><p class="text-no-margin">Connecting to golf ball...</p>'
-            });
+            if (firstTimeConnecting) {
+                $ionicLoading.show({
+                    template: '<ion-spinner></ion-spinner><p class="text-no-margin">Connecting to golf ball...</p>'
+                });
+            }
             ble.connect(golfBall.id, function(success) {
                 if ($scope.popup) {
                     $scope.popup.close();
                 }
                 $scope.golfBall = golfBall;
-                $scope.score = 0;
-                $scope.hole = 1;
-                $ionicLoading.hide();
-                $ionicLoading.show({
-                    template: '<i class="icon ion-android-checkmark-circle"><p class="text-no-margin">Connected!</p>',
-                    duration: 1500
-                });
+                var score = golfBall.name;
+                score = score.substring(score.indexOf(':') + 1, score.indexOf(','));
+                $scope.score = score;
+                $scope.hole++;
+                $scope.holes[$scope.hole]['score'] = $scope.score;
+                if (firstTimeConnecting) {
+                    $ionicLoading.hide();
+                    $ionicLoading.show({
+                        template: '<i class="icon ion-android-checkmark-circle"><p class="text-no-margin">Connected!</p>',
+                        duration: 1500
+                    });
+                }
+                firstTimeConnecting = false;
             }, function(error) {
                 $ionicLoading.hide();
-                var errorPopup = $ionicPopup.alert({
-                    title: 'Connection Error',
-                    template: 'Can\'t connect to the golf ball.'
-                });
-                errorPopup.then(function() {
-                    scanForGolfBalls();
-                });
+                if (firstTimeConnecting) {
+                    var errorPopup = $ionicPopup.alert({
+                        title: 'Connection Error',
+                        template: 'Can\'t connect to the golf ball.'
+                    });
+                    errorPopup.then(function() {
+                        scanForGolfBalls();
+                    });
+                }
+                firstTimeConnecting = false;
             });
         }
         

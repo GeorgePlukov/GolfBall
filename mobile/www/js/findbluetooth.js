@@ -38,29 +38,32 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
 
             ble.startScan([], function(device) {
                 console.log('New device: ' + device);
-                if (device.name != undefined && device.name.substring(0, 4) == 'GOLF') {
-                    var isNewGolfBall = true;
-                    for (var i = 0; i < $scope.golfBalls.length; i++) {
-                        if (device.name == $scope.golfBalls[i].name) {
-                            isNewGolfBall = false;
-                        }
-                    }
-                    if (isNewGolfBall) {
-                        $scope.golfBalls.push(device);
-                        showPopup();
-                    }
-                }
-            });
-        }
+                if (device.name != undefined) {
 
-        function scanForHoles() {
-            if (window.ble === undefined) return;
+                  if ($scope.golfBall != null) {
+                      if (device.name == 'HOLE:true') {
+                          connectToGolfball($scope.golfBall);
+                      }
 
-            ble.startScan([], function(device) {
-                console.log('New devices: ' + device);
-                if (device.name != undefined && device.name == 'HOLE:true') {
-                    connectToGolfball($scope.golfBall);
-                }
+                      if (device.id == $scope.golfBall.id) {
+                          updateScore();
+                      }
+                  } else {
+                      if (device.name.substring(0, 4) == 'GOLF') {
+                          var isNewGolfBall = true;
+                          for (var i = 0; i < $scope.golfBalls.length; i++) {
+                              if (device.name == $scope.golfBalls[i].name) {
+                                  isNewGolfBall = false;
+                              }
+                          }
+                          if (isNewGolfBall) {
+                              $scope.golfBalls.push(device);
+                              showPopup();
+                          }
+                      }
+                  }
+              }
+
             });
         }
 
@@ -84,8 +87,14 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
             });
         }
 
+        function updateScore() {
+            var score = $scope.golfBall.name;
+            score = score.substring(score.indexOf(':') + 1, score.indexOf(','));
+            $scope.score = score;
+            $scope.holes[$scope.hole]['score'] = $scope.score;
+        }
+
         function connectToGolfBall(golfBall) {
-            ble.stopScan();
             if (firstTimeConnecting) {
                 $ionicLoading.show({
                     template: '<ion-spinner></ion-spinner><p class="text-no-margin">Connecting to golf ball...</p>'
@@ -96,11 +105,8 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                     $scope.popup.close();
                 }
                 $scope.golfBall = golfBall;
-                var score = golfBall.name;
-                score = score.substring(score.indexOf(':') + 1, score.indexOf(','));
-                $scope.score = score;
                 $scope.hole++;
-                $scope.holes[$scope.hole]['score'] = $scope.score;
+                updateScore();
                 if (firstTimeConnecting) {
                     $ionicLoading.hide();
                     $ionicLoading.show({

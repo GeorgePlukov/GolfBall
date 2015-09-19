@@ -26,6 +26,11 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
             { hole: 17, par: 5, score: null },
             { hole: 18, par: 4, score: null },
         ];
+        $scope.stats = {
+          first: '31 Par',
+          second: '12 Birdie',
+          third: '6 Bogey'
+        };
 
         function scanForGolfBalls() {
             ble.startScan([], function(device) {

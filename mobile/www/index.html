@@ -71,20 +71,17 @@
             </div>
             <div class="item text-center">
               <p class="text-feature">STATS</p>
-              <div class="row">
-                <div class="col">
-                  <p class="text-feature">BIRDIES</p>
+              <div class="statscard row">
+                <div class="statscard-col-1 col col-50">
+                  {{ stats.first }}
                 </div>
-                <div class="col">
-                  <p class="text-feature">EAGLES</p>
-                </div>
-                <div class="col">
-                  <p class="text-feature">PARS</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <p>DISTANCE</p>
+                <div class="col col-50" style="padding-top: 0;">
+                  <div class="statscard-col-2">
+                    {{ stats.second }}
+                  </div>
+                  <div class="statscard-col-3">
+                    {{ stats.third }}
+                  </div>
                 </div>
               </div>
             </div>

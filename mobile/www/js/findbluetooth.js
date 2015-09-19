@@ -5,7 +5,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
         $scope.golfBalls = [];
         $scope.golfBall = null;
         $scope.popup = null;
-        $scope.hole = 0;
+        $scope.hole = null;
         $scope.score = 'n/a';
         $scope.holes = [
             { hole: 1, par: 4, score: null },
@@ -105,7 +105,11 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                     $scope.popup.close();
                 }
                 $scope.golfBall = golfBall;
-                $scope.hole++;
+                if ($scope.hole == null) {
+                    $scope.hole = 0;
+                } else {
+                    $scope.hole++;
+                }
                 updateScore();
                 if (firstTimeConnecting) {
                     $ionicLoading.hide();

@@ -10,8 +10,9 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
         $scope.pars = ['4', '4', '5', '3', '4', '3', '4', '4', '5'];
         $scope.scores = ['-', '-', '-', '-', '-', '-', '-', '-', '-'];
         $scope.frontNine = true;
-
+        if(window.ble === undefined) return;
         function scanForGolfBalls() {
+
             ble.startScan([], function(device) {
                 console.log('New device: ' + device);
                 if (device.name != undefined && device.name.substring(0, 4) == 'GOLF') {

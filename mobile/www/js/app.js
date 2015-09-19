@@ -5,6 +5,25 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('starter', ['ionic'])
 
+
+.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/')
+
+  $stateProvider.state('findbluetooth', {
+    url: '/findbluetooth',
+    templateUrl: 'views/findbluetooth.html',
+    controller: 'bluetoothCtrl'
+  })
+
+  $stateProvider.state('login', {
+    url: '/',
+    templateUrl: 'views/login.html',
+    controller: 'loginCtrl'
+  });
+
+
+})
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

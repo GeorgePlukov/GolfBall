@@ -5,6 +5,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
         $scope.golfBalls = [];
         $scope.golfBall = null;
         $scope.popup = null;
+        $scope.hole = null;
         $scope.score = 'n/a';
         $scope.holes = [
             { hole: 1, par: 4, score: null },
@@ -73,6 +74,10 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
             });
         }
 
+        function updateScoreForHole(hole, score) {
+          $scope.holes[hole]['score'] = score;
+        }
+
         function connectToGolfBall(golfBall) {
             ble.stopScan();
             $ionicLoading.show({
@@ -84,6 +89,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                 }
                 $scope.golfBall = golfBall;
                 $scope.score = 0;
+                $scope.hole = 1;
                 $ionicLoading.hide();
                 $ionicLoading.show({
                     template: '<i class="icon ion-android-checkmark-circle"><p class="text-no-margin">Connected!</p>',

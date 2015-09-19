@@ -29,7 +29,7 @@
 
 # pragma mark BluetoothConnectionManager Methods
 - (void)scanForGolfBalls {
-    CBUUID *golfBallUUID = [CBUUID UUIDWithString:@"uuid"];
+    CBUUID *golfBallUUID = [CBUUID UUIDWithString:@"0x3039"];
     [_manager scanForPeripheralsWithServices:@[golfBallUUID] options:nil];
 }
 

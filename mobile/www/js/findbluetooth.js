@@ -58,7 +58,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
 
             ble.startScan([], function(device) {
                 console.log('New devices: ' + device);
-                if (device.name != undefined && device.name.substring(0, 4) == 'HOLE') {
+                if (device.name != undefined && device.name == 'HOLE:true') {
                     connectToGolfball($scope.golfBall);
                 }
             });
@@ -109,6 +109,8 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                     });
                 }
                 firstTimeConnecting = false;
+                
+                scanForHoles();
 
                 ble.disconnect(golfBall.id, function(success) {
                   console.log('Disconnect ball successful');

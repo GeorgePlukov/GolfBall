@@ -10,16 +10,16 @@ var app = angular.module('starter', ['ionic','ngStorage'])
   $urlRouterProvider.otherwise('/')
 
   $stateProvider.state('findbluetooth', {
-    url: '/findbluetooth',
+    url: '/',
     templateUrl: 'views/findbluetooth.html',
     controller: 'bluetoothCtrl'
   })
 
-  $stateProvider.state('login', {
-    url: '/',
-    templateUrl: 'views/login.html',
-    controller: 'loginCtrl'
-  });
+//  $stateProvider.state('login', {
+//    url: '/',
+//    templateUrl: 'views/login.html',
+//    controller: 'loginCtrl'
+//  });
 
 
 })

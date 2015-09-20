@@ -1,0 +1,26 @@
+<div style="background:white; height: 100%;">
+    <div style="height:27px;  background-color:white;color:#555555;">
+
+        <h4 ng-click="currentPage = 0" style="margin-top:4px; margin-bottom:5px; text-align:center; width:33.3%; float:left;" >HOME</h4>
+        <h4 ng-click="currentPage = 2" style="margin-top:4px; margin-bottom:5px; float:right;text-align:center; width:33.3%; right:0;" >AUTOCARE</h4>
+        <h4 ng-click="currentPage = 1" style="margin-top:4px; margin-bottom:5px; float:right;text-align:center; width:33.3%; right:0;" >REPORT</h4>
+        <hr id="slidingBar" style=" background: #ef3829; opacity: 1;width: 33.3%;height: 4px;position: absolute;top: 5px; left:0%;border-top:0px solid white !important">
+        
+    </div>
+
+    
+    <ul rn-carousel rn-carousel-index="currentPage" rn-carousel-buffered rn-carousel-locked="isLocked" style="height:calc(100% - 27px); width:100%; background-color:white; margin-bottom:0">
+        <li>  <div style="height:100%" data-ng-include="'views/drivehome.html'" data-ng-controller="DrivehomeCtrl"></div>
+        </li>
+
+        <li>
+            <div style="height:100%" data-ng-include="'views/report.html'"></div>
+        </li>
+
+        <li>
+            <div style="height:100%" data-ng-include="'views/maintenance.html'" data-ng-controller="MaintenanceCtrl"></div>
+        </li>
+
+    </ul>
+    
+</div>

@@ -1,64 +1,31 @@
 <ion-pane>
-  <ion-header-bar class="bar-stable">
-    <h1 class="title">GolfBall</h1>
+  <ion-header-bar class="bar-stable" style="background-color: black;">
+    <h1 class="title" style="font-family: Gibson Semibold;"><span style="color: azure;">Blue</span><span style="color: white;">Ball</span></h1>
   </ion-header-bar>
   <ion-content>
-    <div class="list">
-      <div class="item text-center">
-        <p class="text-feature">SCORE</p>
-        <h1 class="text-no-margin">{{ score }}</h1>
-      </div>
-      <div class="scorecard">
-        <div class="row">
-          <div class="col col-20">
-            <div>Hole</div>
-            <div>Par</div>
-            <div>Score</div>
-          </div>
-          <div class="col col-80">
-            <ion-scroll direction="x">
-              <div class="scorecard-row">
-                <div class="scorecard-col center" ng-repeat="hole in holes">
-                  <div>{{ hole.hole }}</div>
-                  <div>{{ hole.par || '-' }}</div>
-                  <div>{{ hole.score || '-' }}</div>
-                </div>
-                <div class="scorecard-col center">
-                  <div>In</div>
-                  <div>36</div>
-                  <div>-</div>
-                </div>
-                <div class="scorecard-col center">
-                  <div>Out</div>
-                  <div>36</div>
-                  <div>-</div>
-                </div>
-                <div class="scorecard-col center">
-                  <div>Total</div>
-                  <div>72</div>
-                  <div>-</div>
-                </div>
-              </div>
-            </ion-scroll>
-          </div>
-        </div>
-        <div class="item text-center">
-          <p class="text-feature">STATS</p>
-          <div class="statscard row">
-            <div class="statscard-col-1 col col-50">
-              {{ stats.first }}
-            </div>
-            <div class="col col-50" style="padding-top: 0;">
-              <div class="statscard-col-2">
-                {{ stats.second }}
-              </div>
-              <div class="statscard-col-3">
-                {{ stats.third }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<div style="background:white; height: 100%;">
+    <div style="height:27px;  background-color:white;color:#555555;">
+
+        <h4 ng-click="currentPage = 0" style="margin-top:4px; margin-bottom:5px; text-align:center; width:50%; float:left;" >HOME</h4>
+        <h4 ng-click="currentPage = 1" style="margin-top:4px; margin-bottom:5px; float:right;text-align:center; width:50%; right:0;" >LEADERBOARD</h4>
+        <hr id="slidingBar" style=" background: #ef3829; opacity: 1;width: 50%;height: 4px;position: absolute;top: 17px; left:{{-slidingBar/2}}%;border-top:0px solid white !important">
+        
     </div>
+
+    
+    <ul rn-carousel rn-carousel-index="currentPage" rn-carousel-buffered style="height:calc(100% - 27px); width:100%; background-color:white; margin-bottom:0">
+        <li id="1"> 
+          <div style="height:100%" data-ng-include="'views/home.html'" ng-controller="HomeCtrl"></div>
+        </li>
+
+        <li id="2">
+            <div style="height:100%" data-ng-include="'views/leaderboard.html'" ng-controller="LeaderboardCtrl"></div>
+        </li>
+
+    </ul>
+    
+</div>
+
   </ion-content>
 </ion-pane>

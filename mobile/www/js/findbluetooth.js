@@ -1,9 +1,6 @@
-app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoading, $interval, $scope, $timeout) {
+app.controller('bluetoothCtrl', function($ionicPlatform, $ionicModal, $ionicPopup, $ionicLoading, $interval, $scope, $timeout) {
 
     $ionicPlatform.ready(function() {
-
-
-
 
         var firstTimeConnecting = true;
         $scope.golfBalls = [];
@@ -216,6 +213,18 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                 firstTimeConnecting = false;
             });
         }
+
+        $scope.betFriend = function() {
+          $ionicModal.fromTemplateUrl('views/betfriend.html', { scope: $scope }).then(function(modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+          });
+        };
+
+        // Modal
+        $scope.hideBetFriend = function() {
+          $scope.modal.remove();
+        };
 
         // Scan for golf balls from the start
         // scanForGolfBalls();

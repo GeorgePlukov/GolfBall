@@ -2,7 +2,7 @@ int sensorValue;
 int sensorLow = 1023;
 int sensorHigh = 0;
 int previousLight;
-const int sensorPowerPin = 5;
+const int sensorPowerPin = 4;
 
 
 void setup() {

@@ -6,10 +6,11 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
 
 
         var firstTimeConnecting = true;
+        var secondTime = true;
         $scope.golfBalls = [];
         $scope.golfBall = null;
         $scope.popup = null;
-        $scope.hole = null;
+        $scope.hole = 1;
         $scope.score = 'n/a';
         $scope.holes = [{
             hole: 1,
@@ -91,35 +92,36 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
         };
 
 
+
         
         $scope.searchUnpaired = function(){
 
-            // bluetoothSerial.discoverUnpaired(function(data) {
-            //     $scope.searchUnpaired();
-            // }, function(err){
-            //     console.log("error", err);
-            // })
-
-            // bluetoothSerial.setDeviceDiscoveredListener(function(device) {
-            //      if (device.name != undefined) {
-
-            //         if(device.name.substring(0,4) == 'GOLF'){
-            //             updateScore(device);
-            //         }
-
-            //     }
-            // });
-
-            $interval(function(){
+            $scope.searchInterval = $interval(function(){
               ble.startScan([], function(device){
                      if (device.name != undefined) {
 
                         if(device.name.substring(0,4) == 'GOLF'){
-                            updateScore(device);
+                            $scope.golfBall = device;
+                            $scope.golfBalls = [device];
+                            if(firstTimeConnecting){
+                                showPopup();
+                            }
+                            else{
+                                updateScore(device);
+                            }
+                            
                                ble.stopScan(
                                     function() { console.log("Scan complete"); },
                                     function() { console.log("stopScan failed"); }
                                 );
+                        }
+
+                        if(device.name.substring(0,4) == 'HOLE'){
+
+                            if(device.name.split(":")[1] == 'true'){
+                                 connectToGolfBall($scope.golfBall);
+                            }
+                           
                         }
 
 
@@ -128,8 +130,6 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                 }, function(){
 
                 });
-
-          
 
             }, 500)
   
@@ -141,6 +141,7 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
 
 
         function showPopup() {
+            firstTimeConnecting = false;
             if ($scope.popup) {
                 console.log('Yo');
                 $scope.popup.close();
@@ -165,10 +166,11 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
             score = score.substring(score.indexOf(':') + 1, score.indexOf(','));
             $scope.score = score;
             console.log(device);
+
             $timeout(function() {
                 $scope.$digest();
             });
-           // $scope.holes[$scope.hole]['score'] = $scope.score;
+           $scope.holes[$scope.hole-1]['score'] = $scope.score;
         }
 
         function connectToGolfBall(golfBall) {
@@ -177,48 +179,57 @@ app.controller('bluetoothCtrl', function($ionicPlatform, $ionicPopup, $ionicLoad
                     template: '<ion-spinner></ion-spinner><p class="text-no-margin">Connecting to golf ball...</p>'
                 });
             }
-            ble.connect(golfBall.id, function(success) {
+            $interval.cancel($scope.searchInterval);
+
+            $timeout(function(){
+             ble.connect(golfBall.id, function(success) {
                 if ($scope.popup) {
                     $scope.popup.close();
                 }
                 $scope.golfBall = golfBall;
-                if ($scope.hole == null) {
-                    $scope.hole = 0;
-                } else {
+                if (!secondTime) {
                     $scope.hole++;
                 }
-                updateScore();
-                if (firstTimeConnecting) {
+                updateScore(golfBall);
+                if (secondTime) {
                     $ionicLoading.hide();
                     $ionicLoading.show({
                         template: '<i class="icon ion-android-checkmark-circle"><p class="text-no-margin">Connected!</p>',
                         duration: 1500
                     });
                 }
-                firstTimeConnecting = false;
+                secondTime = false;
 
                 ble.disconnect(golfBall.id, function(success) {
+                    //$scope.searchUnpaired();
+                     $scope.searchUnpaired();
                     console.log('Disconnect ball successful');
                 }, function(error) {
+                     $scope.searchUnpaired();
                     console.log('ERROR: Disconnect ball');
                 });
             }, function(error) {
                 $ionicLoading.hide();
-                if (firstTimeConnecting) {
+                console.log(error)
+                 $scope.searchUnpaired();
+                if (secondTime) {
                     var errorPopup = $ionicPopup.alert({
                         title: 'Connection Error',
                         template: 'Can\'t connect to the golf ball.'
                     });
                     errorPopup.then(function() {
-                        //scanForGolfBalls();
+                    
                     });
                 }
-                firstTimeConnecting = false;
+                secondTime = false;
             });
+
+            }, 0);
+           
         }
 
         // Scan for golf balls from the start
-        // scanForGolfBalls();
+       // scanForGolfBalls();
 
     });
 

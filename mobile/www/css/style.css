@@ -1,3 +1,74 @@
+@font-face {
+    font-family: FiraSans Regular;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/FiraSans/FiraSans-Regular.eot");
+    src: url("../fonts/FiraSans/FiraSans-Regular.eot") format("embedded-opentype"), url("../fonts/FiraSans/FiraSans-Regular.woff") format("woff"), url("../fonts/FiraSans/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: FiraSans Light;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/FiraSans/FiraSans-Light.eot");
+    src: url("../fonts/FiraSans/FiraSans-Light.eot") format("embedded-opentype"), url("../fonts/FiraSans/FiraSans-Light.woff") format("woff"), url("../fonts/FiraSans/FiraSans-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: FiraSans Bold;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/FiraSans/FiraSans-Bold.eot");
+    src: url("../fonts/FiraSans/FiraSans-Bold.eot") format("embedded-opentype"), url("../fonts/FiraSans/FiraSans-Bold.woff") format("woff"), url("../fonts/FiraSans/FiraSans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: FiraSans Medium;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/FiraSans/FiraSans-Medium.eot");
+    src: url("../fonts/FiraSans/FiraSans-Medium.eot") format("embedded-opentype"), url("../fonts/FiraSans/FiraSans-Medium.woff") format("woff"), url("../fonts/FiraSans/FiraSans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gibson;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/gibson-webfont.eot");
+    src: url("../fonts/gibson-webfont.eot") format("embedded-opentype"), url("../fonts/gibson-webfont.woff") format("woff"), url("../fonts/gibson-webfont.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gibson Light;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/gibson-light-webfont.eot");
+    src: url("../fonts/gibson-light-webfont.eot") format("embedded-opentype"), url("../fonts/gibson-light-webfont.woff") format("woff"), url("../fonts/gibson-light-webfont.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gibson Bold;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/gibson-bold-webfont.eot");
+    src: url("../fonts/gibson-bold-webfont.eot") format("embedded-opentype"), url("../fonts/gibson-bold-webfont.woff") format("woff"), url("../fonts/gibson-bold-webfont.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gibson Semibold;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../fonts/gibson-semibold-webfont.eot");
+    src: url("../fonts/gibson-semibold-webfont.eot") format("embedded-opentype"), url("../fonts/gibson-semibold-webfont.woff") format("woff"), url("../fonts/gibson-semibold-webfont.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Pacifico;
+    font-weight: normal; 
+    font-style: normal;
+    src: url("../fonts/Pacifico.ttf") format("truetype");
+}
+
 .scroll {
   height: 100%;
 }

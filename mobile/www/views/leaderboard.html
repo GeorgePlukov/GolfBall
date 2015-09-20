@@ -1,3 +1,19 @@
-   <div class="list">
-             
-    </div>
+<div class="list">
+    <div class="title"></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Place</td>
+                <td>Name</td>
+                <td>Score</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in highScores track by $index">
+                <td class="">{{$index}}</td>
+                <td class="">{{user.name}}</td>
+                <td class="">{{user.score}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

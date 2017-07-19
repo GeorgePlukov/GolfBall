@@ -5,4 +5,4 @@ A "smart golfball" made for Hack the North at the University of Waterloo in 2015
 * Tracking of score sheet for mini-putt games
 * Organizing mini-putt games with friends
 * Betting against friends on certain holes, shots, or games using paypal
-
+* Controlled from your phone (iPhone or Android)
